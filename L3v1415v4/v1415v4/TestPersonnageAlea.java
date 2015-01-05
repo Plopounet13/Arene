@@ -8,7 +8,7 @@ import element.Personnage;
 import element.Politicien;
 import element.Barbare;
 import element.Envouteur;
-import element.Jesus;
+//import element.Jesus;
 import element.Paladin;
 import element.Rodeur;
 

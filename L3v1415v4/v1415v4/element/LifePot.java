@@ -15,7 +15,6 @@ public class LifePot extends Potion {
 
 	public LifePot (){
 		super("Potion de vie", 0, 0);
-		setVie(2);
 	}	
 	
 	public String toString(){

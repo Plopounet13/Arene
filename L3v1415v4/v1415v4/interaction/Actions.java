@@ -84,19 +84,24 @@ public class Actions implements IActions {
 		
 		Enumeration<String> enumCaract = valeursPot.keys();
 		
-		while (enumCaract.hasMoreElements()) {
-			String s = enumCaract.nextElement();
-			Integer val = per.getElement().getCaract(s);
-			
-			if (val != null) {
-				nouvellesValeursPer.put(s, val + valeursPot.get(s));
-			}
-			
-			//valeursPot.put(s, 0); //on vide toute la potion, meme si elle ne correspond pas aux caract. du perso ?
-			
-			//pot.majCaractElement(valeursPot);
+		if(pot.getElement().getNom().compareTo("Potion de vie") == 0){
+			Integer valVie = per.getElement().getVie();
+			nouvellesValeursPer.put("vie",valVie + 1);
 		}
-		
+		else {
+			while (enumCaract.hasMoreElements()) {
+				String s = enumCaract.nextElement();
+				Integer val = per.getElement().getCaract(s);
+				
+				if (val != null && (s.compareTo("vie") != 0)) {
+					nouvellesValeursPer.put(s, val + valeursPot.get(s));
+				}
+				
+				//valeursPot.put(s, 0); //on vide toute la potion, meme si elle ne correspond pas aux caract. du perso ?
+				
+				//pot.majCaractElement(valeursPot);
+			}
+		}
 		// mise a jour du personnage
 		per.majCaractElement(nouvellesValeursPer);
 		

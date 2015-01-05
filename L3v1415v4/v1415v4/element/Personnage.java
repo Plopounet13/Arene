@@ -119,7 +119,7 @@ public class Personnage extends Element implements IPersonnage {
 			}
 		}
 		
-		return super.toString() + "[" + getForce() + ", " + getCharisme() + ", " + getArmure() + ", " + getDeter() + lead + eq + "]";
+		return super.toString() + "[" + getVie() + ", " + getForce() + ", " + getCharisme() + ", " + getArmure() + ", " + getDeter() + lead + eq + "]";
 	}
 	
 	
@@ -153,14 +153,11 @@ public class Personnage extends Element implements IPersonnage {
 	
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	/* Priorité au ramassage de potion
+		- Regarder les caract de l'adversaire
+		Si tu peux le battre par le charisme et sinon par la force
+		- Si t'es sûr de perdre, tu fuis.
+	*/
 	
 	/**
 	 * Met en place la strategie. On ne peut utiliser que les methodes de la 
