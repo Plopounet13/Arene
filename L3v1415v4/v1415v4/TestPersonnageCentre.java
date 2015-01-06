@@ -4,8 +4,8 @@
 import java.rmi.RemoteException;
 
 import controle.Console;
-import element.Element;
-import element.Potion;
+//import element.Element;
+//import element.Potion;
 //import element.LifePot;
 //import element.MixPot;
 import element.Personnage;
@@ -34,13 +34,15 @@ public class TestPersonnageCentre {
 			
 			Personnage bidule = new Rodeur("Legolas");
 			Personnage truc = new Barbare("Crom");
+			//Personnage truc2 = new Rodeur("Aragorn");
 			//Element potionDeVie = new LifePot();
 			//Element pot = new MixPot();
-			Element potion = new Potion("Potion",50,40);
+			//Element potion = new Potion("Potion",50,40);
 			
 			//new Console(potionDeVie, 50, 40, port, ipArene);
 			//new Console(pot, 45, 40, port, ipArene);
-			new Console(potion, 50, 40, port, ipArene);
+			//new Console(potion, 50, 40, port, ipArene);
+			//new Console(truc2, 35, 30, port, ipArene);
 			new Console(bidule, 40, 40, port, ipArene);
 			new Console(truc, 1, 1, port, ipArene);
 		} catch (RemoteException e) {
