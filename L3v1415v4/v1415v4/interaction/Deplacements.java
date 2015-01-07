@@ -129,5 +129,106 @@ public class Deplacements implements IDeplacements {
 	        actionExecutee = true;
     	}
     }
+    
+    /**
+     * Deplace ce sujet, à sa vitesse de course, en direction du sujet dont la reference est donnee en parametre
+     * ref de soi-meme pour du sur-place, 0 pour errer et ref d'un voisin (s'il existe)
+     * On ne manipule que la VueElement
+     * 
+     * @param ref
+     * @param vitesse
+     */
 
+    public void courirVers(int ref, float vitesse) {
+    	if(actionExecutee) {
+    		System.err.println("Une action a deja ete executee pendant ce tour !");
+    	} else {
+        	Point pvers;
+        	
+            //si la cible est l'element meme, il reste sur place
+            if (ref==ve.getRef()) return;
+            
+            //la reference est nulle : le personnage erre
+            if (ref==0) { //initialisation aleatoie
+                    Random r=new Random();
+                    pvers=new Point(r.nextInt(100), r.nextInt(100));     
+            } else {//sinon la cible devient le point sur lequel se trouve l'element le plus proche
+                pvers=voisins.get(ref).getPoint();
+            }
+            
+            //si l'element n'existe plus (cas posible: deconnexion du serveur), le point reste sur place
+            if (pvers == null) return;
+            
+            //calcule la direction pour atteindre la ref (+1/-1 par rapport a la position courante)
+            int dx=(int) (pvers.getX()-ve.getPoint().x);
+            
+            if (dx!=0) {
+                dx=(int)(dx*vitesse/Math.abs(dx));
+            }
+            
+            int dy=(int) (pvers.getY()-ve.getPoint().y);
+            
+            if (dy!=0) {
+                dy=(int)(dy*vitesse/Math.abs(dy));
+            }
+            
+            //instancie le point destination
+            Point dest = new Point(ve.getPoint().x+dx,ve.getPoint().y+dy);
+            
+            //si le point destination est libre
+            if (Calculs.caseVide(dest, voisins)) {
+                //l'element courant se deplace
+                ve.setPoint(dest);
+            } else {
+                //cherche la case libre la plus proche dans la direction de la cible
+                Point top = Calculs.meilleurPoint(ve.getPoint(),dest,voisins);
+                //deplace l'element courant sur celle-la
+                ve.setPoint(top);
+            }
+            
+            actionExecutee = true;
+    	}
+    }
+    /**
+     * Deplace ce sujet à sa vitesse de course, en direction de la case specifiee.
+     * On ne manipule que la VueElement
+     * 
+     * @param pvers
+     * @param vitesse
+     */
+    
+    public void courirVers(Point pvers, float vitesse) {
+    	if(actionExecutee) {
+    		System.err.println("Une action a deja ete executee pendant ce tour !");
+    	} else {
+	    	//calcule la direction pour atteindre la ref (+1/-1 par rapport a la position courante)
+	        int dx=(int) (pvers.getX()-ve.getPoint().x);
+	        
+	        if (dx!=0) {
+	            dx=(int)(dx*vitesse/Math.abs(dx));
+	        }
+	        
+	        int dy=(int) (pvers.getY()-ve.getPoint().y);
+	        
+	        if (dy!=0) {
+	            dy=(int)(dy*vitesse/Math.abs(dy));
+	        }
+	        
+	        //instancie le point destination
+	        Point dest = new Point(ve.getPoint().x+dx,ve.getPoint().y+dy);
+	        
+	        //si le point destination est libre
+	        if (Calculs.caseVide(dest, voisins)) {
+	            //l'element courant se deplace
+	            ve.setPoint(dest);
+	        } else {
+	            //cherche la case libre la plus proche dans la direction de la cible
+	            Point top = Calculs.meilleurPoint(ve.getPoint(),dest,voisins);
+	            //deplace l'element courant sur celle-la
+	            ve.setPoint(top);
+	        }
+	        
+	        actionExecutee = true;
+    	}
+    }
 }

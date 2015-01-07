@@ -8,6 +8,7 @@ import interaction.Actions;
 import interaction.Deplacements;
 import interfaceGraphique.VueElement;
 
+import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -32,6 +33,8 @@ public class Personnage extends Element implements IPersonnage {
 	 * Vide si le leader n'est pas egal a -1.
 	 */
 	private ArrayList<Integer> equipe;
+	
+	private float vitesse;
 
 	/**
 	 * Constructeur d'un personnage avec un nom et une quantite de force, de charisme, d'armure et de determination.
@@ -42,12 +45,13 @@ public class Personnage extends Element implements IPersonnage {
 	 * @param armure
 	 * @param determination
 	 */
-	public Personnage(String nom, int force, int charisme, int armure, int deter) {
+	public Personnage(String nom, int force, int charisme, int armure, int deter, float vitesse) {
 		super(nom);
 		ajouterCaract("force", force);
 		ajouterCaract("charisme", charisme);
 		ajouterCaract("armure", armure);
 		ajouterCaract("deter", deter);
+		this.vitesse = vitesse;
 
 		leader = -1;
 		equipe = new ArrayList<Integer>();
@@ -162,7 +166,39 @@ public class Personnage extends Element implements IPersonnage {
 	 * Determine la direction de laquelle s'éloigner. 
 	 * Par le calcul d'un baricentre pondéré positivement par les ennemis trop forts
 	 * et négativement par les ennemis plus faible.
+	 * 
+	 * Attention les tableaux ne doivent pas être tous les deux vides.
+	 * 
+	 * @param tabFort tableau des positions des personnages plus fort
+	 * @param rabFaible tableau des positions des personnages plus faible
+	 * @return PosAFuir.
 	 */
+	private Point calculFuite (Point[] tabFort, Point[] tabFaible){
+		Point posAFuir = new Point(0,0);
+		int nb;
+		for (nb = 0; nb < tabFort.length; ++nb) {
+			posAFuir.translate((int) tabFort[nb].getX(), (int) tabFort[nb].getY());
+		}
+		for (int i = 0; i < tabFaible.length; i++) {
+			posAFuir.translate((int) -tabFaible[i].getX(), (int) -tabFaible[i].getY());
+			--nb;
+		}
+		posAFuir.move((int) posAFuir.getX()/nb, (int)posAFuir.getY()/nb);
+		return posAFuir;
+	}
+	
+	/**
+	 * Calcule la direction dans laquelle fuir à partir d'une position et du point à fuir.
+	 * 
+	 * @param posMoi
+	 * @param posAFuir
+	 * @return direction dans laquelle fuir
+	 */
+	
+	private Point dirFuite (Point posMoi, Point posAFuir){
+		posMoi.move((int) (2*posMoi.getX() - posAFuir.getX()), (int) (2*posMoi.getY() - posAFuir.getY()));
+		return (posMoi);
+	}
 	
 	/**
 	 * Met en place la strategie. On ne peut utiliser que les methodes de la 
