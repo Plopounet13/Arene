@@ -158,6 +158,11 @@ public class Personnage extends Element implements IPersonnage {
 		Si tu peux le battre par le charisme et sinon par la force
 		- Si t'es sûr de perdre, tu fuis.
 	*/
+	/**
+	 * Determine la direction de laquelle s'éloigner. 
+	 * Par le calcul d'un baricentre pondéré positivement par les ennemis trop forts
+	 * et négativement par les ennemis plus faible.
+	 */
 	
 	/**
 	 * Met en place la strategie. On ne peut utiliser que les methodes de la 
