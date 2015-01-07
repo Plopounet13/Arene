@@ -4,10 +4,9 @@ import java.rmi.RemoteException;
 import java.util.Random;
 
 import controle.Console;
-import element.Element;
-import element.Potion;
+import element.CharPot;
 
-public class TestPotionAlea {
+public class TestPotionChAlea {
 
 	/**
 	 * @param args
@@ -20,10 +19,11 @@ public class TestPotionAlea {
 			if (args.length!=0) port=Integer.parseInt(args[0]);
 			String ipArene = "localhost";
 			if (args.length!=0) if (args[1]!="") ipArene=args[1];
-			Element anduril = new Potion("Anduril", 50, 50);
+			
+			CharPot popo = new CharPot();
 	
 			Random r = new Random();
-			new Console(anduril, r.nextInt(100),r.nextInt(100), port,ipArene);
+			new Console(popo, r.nextInt(100),r.nextInt(100), port,ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

@@ -1,9 +1,7 @@
 import java.rmi.RemoteException;
 
 import controle.Console;
-import element.Element;
-//import element.LifePot;
-import element.Potion;
+import element.LifePot;
 
 /**
  * 
@@ -13,7 +11,7 @@ import element.Potion;
  * @author lois
  *
  */
-public class TestPotionCentre {
+public class TestPotionVieCentre {
 
 	/**
 	 * @param args
@@ -25,10 +23,9 @@ public class TestPotionCentre {
 			String ipArene = "localhost";
 			if (args.length!=0) if (args[1]!="") ipArene=args[1];
 			//Element potionDeVie = new LifePot();
-			Element potion = new Potion("Potion",50,45);
-	
-			//new Console(potionDeVie, 45, 40, port,ipArene);
-			new Console(potion, 45, 40, port,ipArene);
+			LifePot popo = new LifePot();
+			
+			new Console(popo, 45, 40, port,ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
