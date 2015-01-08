@@ -5,15 +5,7 @@ import java.util.Random;
 
 import controle.Console;
 import element.Personnage;
-import element.Politicien;
-import element.Barbare;
-import element.Envouteur;
-//import element.Jesus;
 import element.Paladin;
-import element.Rodeur;
-
-//import element.Element;
-//import element.LifePot;
 
 /**
  * Test de la Console avec un Element qui s'ajoute a l'Arene (apres lancement Arene et IHM). A lancer en plusieurs exemplaires.
@@ -37,7 +29,6 @@ public class TestPaladinAlea {
 			
 			Random r = new Random();
 			new Console(paladin, r.nextInt(100), r.nextInt(100), port, ipArene);
-			//new Console(potionDeVie, 40, 40, port, ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
