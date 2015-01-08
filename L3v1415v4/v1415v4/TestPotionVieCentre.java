@@ -22,7 +22,6 @@ public class TestPotionVieCentre {
 			if (args.length!=0) port=Integer.parseInt(args[0]);
 			String ipArene = "localhost";
 			if (args.length!=0) if (args[1]!="") ipArene=args[1];
-			//Element potionDeVie = new LifePot();
 			LifePot popo = new LifePot();
 			
 			new Console(popo, 45, 40, port,ipArene);
