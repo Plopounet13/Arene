@@ -65,6 +65,7 @@ public class Personnage extends Element implements IPersonnage {
 		equipe = new ArrayList<Integer>();
 		nbAvance = 0;
 		retour = false;
+		procDir = null;
 	}
 	
 	/* ----------------------------------------------------------
@@ -441,14 +442,13 @@ public class Personnage extends Element implements IPersonnage {
 		
         Actions actions = new Actions(ve, voisins); //je recupere les voisins (distance < 10)
         Deplacements deplacements = new Deplacements(ve,voisins);
-        Point dir = null;
         Point pos = ve.getPoint();
         
         // Si aucun voisins, j'erre
         if (0 == voisins.size()){
         	parler("J'erre intelligemment...", ve);
-        	dir = calculProcDir(dir, pos);
-        	deplacements.seDirigerVers(new Point((dir.x+pos.x), (dir.y + pos.y)));
+        	procDir = calculProcDir(procDir, pos);
+        	deplacements.seDirigerVers(new Point((procDir.x+pos.x), (procDir.y + pos.y)));
         } else {
 			// Parcours de la table pour récupérer les voisins plus forts
         	Point[] tabFort = trouverPosVoisinsFort(voisins);
