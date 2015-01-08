@@ -96,7 +96,6 @@ public class DuelBasic implements IDuel {
 				} else {
 					ajouterEquipe(attaquant, defenseur);
 					System.out.println("Egalité, aucun des deux concurrent n'a pu s'imposer.\n Ils deviennent amis.");
-					// A faire : application de malus
 				}
 			}
 		} catch (RemoteException e) {
