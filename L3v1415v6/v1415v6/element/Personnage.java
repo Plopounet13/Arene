@@ -421,9 +421,8 @@ public class Personnage extends Element implements IPersonnage {
 	 * @return booleen
 	 */
 	private boolean potionUtile(Element elemPlusProche){
-		return(elemPlusProche.getCaract("force") == 0 
-					&& elemPlusProche.getCaract("vie") >= 0 
-					&& elemPlusProche.getCaract("vie") <= 100-this.getVie());
+		return(elemPlusProche.getCaract("force") >= 0 
+					&& elemPlusProche.getCaract("vie") >= 0);
 	}
 	
 	/** --------------------------------------------------------------------
